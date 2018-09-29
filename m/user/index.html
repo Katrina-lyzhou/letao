@@ -25,7 +25,7 @@
                 <a class="mui-navigate-right" href="#account">
                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="../images/user.jpg">
                     <div class="mui-media-body">
-                        Hello MUI
+                        <span class="uname"></span>
                         <p class="mui-ellipsis">账号:hellomui</p>
                     </div>
                 </a>
@@ -61,9 +61,8 @@
             $.ajax({
                 url:'/api/user/logout',
                 success:function(info){
-                    console.log(info)
-                    if (info.success) {
-                        location.href='/m';
+                    if (info.error) {
+                        location.href='../index.html';
                     }
                 }
             })
@@ -77,11 +76,11 @@
                 withCredentials : true
             },
             success: function (info) {
-                console.log(info);
-
-                // if(info.error) {
-                //     location.href = './login.html';
-                // }
+                console.log(info.username);
+                $('span.uname').text(info.username);
+                if(info.error) {
+                    location.href = './login.html';
+                }
             }
         });
     </script>
